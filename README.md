@@ -28,15 +28,7 @@ São necessários apenas 2 programas: **Docker**, que roda as aplicações em co
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-3. **Reabertura do Terminal**: fechar (`Cmd + Q`) e abrir de novo, senão a janela antiga segue respondendo `brew: command not found`. Na janela nova, `brew --version` deve mostrar um número.
-
-   Se ainda assim não funcionar, colar as linhas abaixo uma única vez e reabrir o Terminal:
-
-   ```bash
-   BREW=$( [ -x /opt/homebrew/bin/brew ] && echo /opt/homebrew/bin/brew || echo /usr/local/bin/brew )
-   echo "eval \"\$($BREW shellenv)\"" >> ~/.zprofile
-   eval "$($BREW shellenv)"
-   ```
+3. **Reabertura do Terminal**: fechar a janela com `Cmd + Q` e abrir outra com `Cmd + Espaço`, digitando `Terminal`. Sem isso, o comando `brew` não é reconhecido.
 
 4. **Instalação do Docker e do k6**:
 
@@ -260,7 +252,7 @@ Em cada submenu, a opção `7) Stop` derruba a pilha correspondente. Fechar o Do
 | Sintoma | Causa provável | Solução |
 |---|---|---|
 | O download trouxe o repositório, sem as aplicações | Foi baixado o **Source code (zip)** em vez do pacote | Baixar o arquivo `TCC_Micros_vs_Monolith.zip` na seção *Assets* da release |
-| `brew: command not found` logo após instalar o Homebrew | A janela do Terminal foi aberta antes da instalação e por isso ainda não enxerga o novo comando | Fechar o Terminal e abrir de novo, conforme o passo 3 da seção do macOS |
+| `brew: command not found` logo após instalar o Homebrew | A janela do Terminal foi aberta antes da instalação e por isso ainda não enxerga o novo comando | Fechar o Terminal e abrir de novo, conforme o passo 3 da seção do macOS. Se persistir, colar `echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile` e reabrir o Terminal |
 | `unzip: command not found` ou `curl: command not found` | Instalação nova do WSL ou imagem Linux enxuta | `sudo apt update && sudo apt install -y curl unzip` |
 | `no such file or directory` ao entrar na pasta | O download foi feito pelo navegador, então o arquivo está em Downloads, e não na pasta em que o terminal abriu | `cd ~/Downloads` antes de descompactar ou de entrar na pasta |
 | `Cannot connect to the Docker daemon` | Docker Desktop não está aberto | Abrir o Docker Desktop e aguardar a baleia estabilizar |
