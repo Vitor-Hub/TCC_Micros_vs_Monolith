@@ -129,7 +129,7 @@ Pelo terminal, o endereço abaixo baixa sempre a versão mais recente, sem preci
 curl -L -O https://github.com/vispdev/tcc/releases/latest/download/TCC_Micros_vs_Monolith.zip
 ```
 
-O terminal sempre abre na pasta pessoal do usuário. Quando o download foi feito pelo navegador, o arquivo está em Downloads, e é preciso ir até lá antes de continuar. Quando o download foi feito pelo `curl` acima, o arquivo já está na pasta atual e esta linha pode ser pulada:
+Quem baixou pelo navegador precisa ir até a pasta Downloads antes de continuar:
 
 ```bash
 cd ~/Downloads
