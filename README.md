@@ -1,6 +1,7 @@
 # TCC: Comparação Empírica entre Arquitetura Monolítica e Microsserviços
 
-> Trabalho de Conclusão de Curso (TCC), UERJ, Faculdade de Engenharia, Departamento de Engenharia de Sistemas e Computação
+Trabalho de Conclusão do curso de Engenharia Elétrica com ênfase em Sistemas e Computação, da Faculdade de Engenharia da Universidade do Estado do Rio de Janeiro (UERJ).
+
 > Aluno: Vitor Santos Pereira (matrícula: 201510170911) | Orientador: Robert Mota Oliveira
 
 Este repositório contém **duas versões do mesmo sistema**: uma construída como aplicação única (**monólito**) e outra dividida em serviços independentes (**microsserviços**). As duas fazem exatamente a mesma coisa; a diferença está apenas na arquitetura interna.
