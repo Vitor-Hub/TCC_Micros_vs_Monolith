@@ -28,7 +28,7 @@ São necessários apenas 2 programas: **Docker**, que roda as aplicações em co
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-3. **Habilitação do Homebrew no Terminal**: o instalador termina sem deixar o comando `brew` disponível, e por isso o passo seguinte responde `brew: command not found` nos Macs com chip Apple (M1 e posteriores). As três linhas abaixo, coladas de uma vez, resolvem na sessão atual e também nas próximas aberturas do Terminal. Elas precisam ser executadas uma única vez:
+3. **Habilitação do Homebrew no Terminal**: o instalador não ajusta as configurações do Terminal sozinho, e por isso o comando `brew` responde `command not found` logo depois da instalação nos Macs com chip Apple (M1 e posteriores). As três linhas abaixo, coladas de uma vez, corrigem isso de forma permanente e precisam ser executadas uma única vez:
 
    ```bash
    BREW=$( [ -x /opt/homebrew/bin/brew ] && echo /opt/homebrew/bin/brew || echo /usr/local/bin/brew )
@@ -36,17 +36,17 @@ São necessários apenas 2 programas: **Docker**, que roda as aplicações em co
    eval "$($BREW shellenv)"
    ```
 
-   O comando `brew --version` deve responder com um número de versão antes de seguir adiante.
+4. **Reabertura do Terminal**: fechar a janela do Terminal (`Cmd + Q`) e abrir de novo. As configurações são lidas apenas no momento em que um terminal abre, então a janela antiga continua sem enxergar o que acabou de ser instalado. Na janela nova, `brew --version` deve responder com um número de versão antes de seguir adiante.
 
-4. **Instalação do Docker e do k6**:
+5. **Instalação do Docker e do k6**:
 
    ```bash
    brew install --cask docker && brew install k6
    ```
 
-5. **Abertura do Docker Desktop**: `Cmd + Espaço`, digitar `Docker` e pressionar Enter. Na primeira execução ele pede permissões, que devem ser aceitas. O ícone da baleia na barra superior para de se mexer quando o Docker está pronto.
+6. **Abertura do Docker Desktop**: `Cmd + Espaço`, digitar `Docker` e pressionar Enter. Na primeira execução ele pede permissões, que devem ser aceitas. O ícone da baleia na barra superior para de se mexer quando o Docker está pronto.
 
-6. **Verificação**: cada comando abaixo deve produzir o resultado indicado.
+7. **Verificação**: os comandos abaixo devem ser executados em uma janela do Terminal aberta depois das instalações, pelo mesmo motivo do passo 4. Cada um deve produzir o resultado indicado.
 
    | Comando | Resultado esperado |
    |---|---|
@@ -76,7 +76,7 @@ No Windows, o caminho mais simples é o **WSL** (um Linux dentro do Windows, ofi
    sudo apt update && sudo apt install -y k6
    ```
 
-4. **Verificação** com os mesmos comandos da tabela do macOS. **Daqui em diante, tudo é executado dentro da janela do Ubuntu.**
+4. **Verificação** com os mesmos comandos da tabela do macOS. Se algum deles não for reconhecido logo após a instalação, o caminho é fechar a janela do Ubuntu e abrir de novo, porque um programa recém-instalado só é enxergado por janelas abertas depois dele. **Daqui em diante, tudo é executado dentro da janela do Ubuntu.**
 
 > Se uma tentativa anterior deixou o repositório do k6 quebrado (erros de `NO_PUBKEY` ou `unsupported filetype`), basta remover o chaveiro antigo antes de repetir o passo 3: `sudo rm -f /usr/share/keyrings/k6-archive-keyring.gpg`.
 
@@ -98,7 +98,7 @@ echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.i
 sudo apt update && sudo apt install -y k6
 ```
 
-A verificação usa os mesmos comandos da tabela do macOS.
+A verificação usa os mesmos comandos da tabela do macOS, em um terminal aberto depois das instalações. O `usermod` acima só passa a valer depois de sair e entrar na sessão novamente, e até lá o `docker` responde erro de permissão.
 
 ### Recursos que o Docker precisa ter
 
@@ -260,7 +260,7 @@ Em cada submenu, a opção `7) Stop` derruba a pilha correspondente. Fechar o Do
 | Sintoma | Causa provável | Solução |
 |---|---|---|
 | O download trouxe o repositório, sem as aplicações | Foi baixado o **Source code (zip)** em vez do pacote | Baixar o arquivo `TCC_Micros_vs_Monolith.zip` na seção *Assets* da release |
-| `brew: command not found` logo após instalar o Homebrew | Macs com chip Apple guardam o Homebrew em uma pasta que o Terminal ainda não conhece | Executar o passo 3 da seção do macOS, que habilita o `brew` na sessão atual e nas próximas |
+| `brew: command not found` logo após instalar o Homebrew | Macs com chip Apple guardam o Homebrew em uma pasta que o Terminal ainda não conhece | Executar os passos 3 e 4 da seção do macOS, que habilitam o `brew` e reabrem o Terminal |
 | `unzip: command not found` ou `curl: command not found` | Instalação nova do WSL ou imagem Linux enxuta | `sudo apt update && sudo apt install -y curl unzip` |
 | `no such file or directory` ao entrar na pasta | O download foi feito pelo navegador, então o arquivo está em Downloads, e não na pasta em que o terminal abriu | `cd ~/Downloads` antes de descompactar ou de entrar na pasta |
 | `Cannot connect to the Docker daemon` | Docker Desktop não está aberto | Abrir o Docker Desktop e aguardar a baleia estabilizar |
