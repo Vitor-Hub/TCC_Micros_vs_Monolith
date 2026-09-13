@@ -28,7 +28,9 @@ São necessários apenas 2 programas: **Docker**, que roda as aplicações em co
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-3. **Habilitação do Homebrew no Terminal**: o instalador não ajusta as configurações do Terminal sozinho, e por isso o comando `brew` responde `command not found` logo depois da instalação nos Macs com chip Apple (M1 e posteriores). As três linhas abaixo, coladas de uma vez, corrigem isso de forma permanente e precisam ser executadas uma única vez:
+3. **Reabertura do Terminal**: fechar a janela do Terminal (`Cmd + Q`) e abrir de novo. A instalação deixa o comando `brew` pronto para uso, mas cada terminal lê essa configuração apenas no instante em que abre, então a janela usada na instalação continua respondendo `brew: command not found`. Na janela nova, `brew --version` deve responder com um número de versão antes de seguir adiante.
+
+   No caso raro de o comando seguir não reconhecido, as três linhas abaixo resolvem em definitivo e precisam ser coladas uma única vez, seguidas de nova reabertura do Terminal:
 
    ```bash
    BREW=$( [ -x /opt/homebrew/bin/brew ] && echo /opt/homebrew/bin/brew || echo /usr/local/bin/brew )
@@ -36,17 +38,15 @@ São necessários apenas 2 programas: **Docker**, que roda as aplicações em co
    eval "$($BREW shellenv)"
    ```
 
-4. **Reabertura do Terminal**: fechar a janela do Terminal (`Cmd + Q`) e abrir de novo. As configurações são lidas apenas no momento em que um terminal abre, então a janela antiga continua sem enxergar o que acabou de ser instalado. Na janela nova, `brew --version` deve responder com um número de versão antes de seguir adiante.
-
-5. **Instalação do Docker e do k6**:
+4. **Instalação do Docker e do k6**:
 
    ```bash
    brew install --cask docker && brew install k6
    ```
 
-6. **Abertura do Docker Desktop**: `Cmd + Espaço`, digitar `Docker` e pressionar Enter. Na primeira execução ele pede permissões, que devem ser aceitas. O ícone da baleia na barra superior para de se mexer quando o Docker está pronto.
+5. **Abertura do Docker Desktop**: `Cmd + Espaço`, digitar `Docker` e pressionar Enter. Na primeira execução ele pede permissões, que devem ser aceitas. O ícone da baleia na barra superior para de se mexer quando o Docker está pronto.
 
-7. **Verificação**: os comandos abaixo devem ser executados em uma janela do Terminal aberta depois das instalações, pelo mesmo motivo do passo 4. Cada um deve produzir o resultado indicado.
+6. **Verificação**: os comandos abaixo devem ser executados em uma janela do Terminal aberta depois das instalações, pelo mesmo motivo do passo 3. Cada um deve produzir o resultado indicado.
 
    | Comando | Resultado esperado |
    |---|---|
@@ -260,7 +260,7 @@ Em cada submenu, a opção `7) Stop` derruba a pilha correspondente. Fechar o Do
 | Sintoma | Causa provável | Solução |
 |---|---|---|
 | O download trouxe o repositório, sem as aplicações | Foi baixado o **Source code (zip)** em vez do pacote | Baixar o arquivo `TCC_Micros_vs_Monolith.zip` na seção *Assets* da release |
-| `brew: command not found` logo após instalar o Homebrew | Macs com chip Apple guardam o Homebrew em uma pasta que o Terminal ainda não conhece | Executar os passos 3 e 4 da seção do macOS, que habilitam o `brew` e reabrem o Terminal |
+| `brew: command not found` logo após instalar o Homebrew | A janela do Terminal foi aberta antes da instalação e por isso ainda não enxerga o novo comando | Fechar o Terminal e abrir de novo, conforme o passo 3 da seção do macOS |
 | `unzip: command not found` ou `curl: command not found` | Instalação nova do WSL ou imagem Linux enxuta | `sudo apt update && sudo apt install -y curl unzip` |
 | `no such file or directory` ao entrar na pasta | O download foi feito pelo navegador, então o arquivo está em Downloads, e não na pasta em que o terminal abriu | `cd ~/Downloads` antes de descompactar ou de entrar na pasta |
 | `Cannot connect to the Docker daemon` | Docker Desktop não está aberto | Abrir o Docker Desktop e aguardar a baleia estabilizar |
