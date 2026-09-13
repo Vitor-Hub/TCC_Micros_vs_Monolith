@@ -127,7 +127,13 @@ Pelo terminal, o endereço abaixo baixa sempre a versão mais recente, sem preci
 curl -L -O https://github.com/vispdev/tcc/releases/latest/download/TCC_Micros_vs_Monolith.zip
 ```
 
-Em seguida, basta descompactar e entrar na pasta criada, que leva a versão no nome:
+O terminal sempre abre na pasta pessoal do usuário. Quando o download foi feito pelo navegador, o arquivo está em Downloads, e é preciso ir até lá antes de continuar. Quando o download foi feito pelo `curl` acima, o arquivo já está na pasta atual e esta linha pode ser pulada:
+
+```bash
+cd ~/Downloads
+```
+
+Em seguida, basta descompactar e entrar na pasta criada, que leva a versão no nome. Se o arquivo já tiver sido descompactado com dois cliques (no Finder, no macOS, ou no Explorador de Arquivos, no Windows), a pasta já existe e apenas a segunda linha é necessária:
 
 ```bash
 unzip TCC_Micros_vs_Monolith.zip
@@ -245,6 +251,7 @@ Em cada submenu, a opção `7) Stop` derruba a pilha correspondente. Fechar o Do
 |---|---|---|
 | O download trouxe o repositório, sem as aplicações | Foi baixado o **Source code (zip)** em vez do pacote | Baixar o arquivo `TCC_Micros_vs_Monolith.zip` na seção *Assets* da release |
 | `unzip: command not found` ou `curl: command not found` | Instalação nova do WSL ou imagem Linux enxuta | `sudo apt update && sudo apt install -y curl unzip` |
+| `no such file or directory` ao entrar na pasta | O download foi feito pelo navegador, então o arquivo está em Downloads, e não na pasta em que o terminal abriu | `cd ~/Downloads` antes de descompactar ou de entrar na pasta |
 | `Cannot connect to the Docker daemon` | Docker Desktop não está aberto | Abrir o Docker Desktop e aguardar a baleia estabilizar |
 | Health Check mostra menos de 7/7 | Serviços ainda registrando no Eureka | Aguardar 1 a 2 minutos e repetir o Health Check |
 | Erros 503/405 nos primeiros segundos de teste | Gateway ainda propagando o registro do Eureka (60 a 90 s após ficar healthy) | Aguardar e reiniciar o teste |
