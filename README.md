@@ -28,15 +28,25 @@ São necessários apenas 2 programas: **Docker**, que roda as aplicações em co
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-3. **Instalação do Docker e do k6**:
+3. **Habilitação do Homebrew no Terminal**: o instalador termina sem deixar o comando `brew` disponível, e por isso o passo seguinte responde `brew: command not found` nos Macs com chip Apple (M1 e posteriores). As três linhas abaixo, coladas de uma vez, resolvem na sessão atual e também nas próximas aberturas do Terminal. Elas precisam ser executadas uma única vez:
+
+   ```bash
+   BREW=$( [ -x /opt/homebrew/bin/brew ] && echo /opt/homebrew/bin/brew || echo /usr/local/bin/brew )
+   echo "eval \"\$($BREW shellenv)\"" >> ~/.zprofile
+   eval "$($BREW shellenv)"
+   ```
+
+   O comando `brew --version` deve responder com um número de versão antes de seguir adiante.
+
+4. **Instalação do Docker e do k6**:
 
    ```bash
    brew install --cask docker && brew install k6
    ```
 
-4. **Abertura do Docker Desktop**: `Cmd + Espaço`, digitar `Docker` e pressionar Enter. Na primeira execução ele pede permissões, que devem ser aceitas. O ícone da baleia na barra superior para de se mexer quando o Docker está pronto.
+5. **Abertura do Docker Desktop**: `Cmd + Espaço`, digitar `Docker` e pressionar Enter. Na primeira execução ele pede permissões, que devem ser aceitas. O ícone da baleia na barra superior para de se mexer quando o Docker está pronto.
 
-5. **Verificação**: cada comando abaixo deve produzir o resultado indicado.
+6. **Verificação**: cada comando abaixo deve produzir o resultado indicado.
 
    | Comando | Resultado esperado |
    |---|---|
@@ -250,6 +260,7 @@ Em cada submenu, a opção `7) Stop` derruba a pilha correspondente. Fechar o Do
 | Sintoma | Causa provável | Solução |
 |---|---|---|
 | O download trouxe o repositório, sem as aplicações | Foi baixado o **Source code (zip)** em vez do pacote | Baixar o arquivo `TCC_Micros_vs_Monolith.zip` na seção *Assets* da release |
+| `brew: command not found` logo após instalar o Homebrew | Macs com chip Apple guardam o Homebrew em uma pasta que o Terminal ainda não conhece | Executar o passo 3 da seção do macOS, que habilita o `brew` na sessão atual e nas próximas |
 | `unzip: command not found` ou `curl: command not found` | Instalação nova do WSL ou imagem Linux enxuta | `sudo apt update && sudo apt install -y curl unzip` |
 | `no such file or directory` ao entrar na pasta | O download foi feito pelo navegador, então o arquivo está em Downloads, e não na pasta em que o terminal abriu | `cd ~/Downloads` antes de descompactar ou de entrar na pasta |
 | `Cannot connect to the Docker daemon` | Docker Desktop não está aberto | Abrir o Docker Desktop e aguardar a baleia estabilizar |
