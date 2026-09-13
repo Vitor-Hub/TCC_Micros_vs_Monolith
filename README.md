@@ -28,9 +28,9 @@ São necessários apenas 2 programas: **Docker**, que roda as aplicações em co
    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
    ```
 
-3. **Reabertura do Terminal**: fechar a janela do Terminal (`Cmd + Q`) e abrir de novo. A instalação deixa o comando `brew` pronto para uso, mas cada terminal lê essa configuração apenas no instante em que abre, então a janela usada na instalação continua respondendo `brew: command not found`. Na janela nova, `brew --version` deve responder com um número de versão antes de seguir adiante.
+3. **Reabertura do Terminal**: fechar (`Cmd + Q`) e abrir de novo, senão a janela antiga segue respondendo `brew: command not found`. Na janela nova, `brew --version` deve mostrar um número.
 
-   No caso raro de o comando seguir não reconhecido, as três linhas abaixo resolvem em definitivo e precisam ser coladas uma única vez, seguidas de nova reabertura do Terminal:
+   Se ainda assim não funcionar, colar as linhas abaixo uma única vez e reabrir o Terminal:
 
    ```bash
    BREW=$( [ -x /opt/homebrew/bin/brew ] && echo /opt/homebrew/bin/brew || echo /usr/local/bin/brew )
